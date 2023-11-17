@@ -26,6 +26,11 @@ labels_dict = {
     **{i: 'Sign is not in the list' for i in range(36, 63)}
 }
 
+stored_signs = []
+
+key = 0  # Initialize key outside the loop
+message = "Press 's' to add, 'p' to display"
+
 while True:
     data_aux = []
     x_ = []
@@ -80,9 +85,23 @@ while True:
         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 4)
         cv2.putText(frame, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 3, cv2.LINE_AA)
 
+        key = cv2.waitKey(1) & 0xFF
+
+        # Press 's' to store the detected sign
+        if key == ord('s') and predicted_character != 'Sign is not in the list':
+            stored_signs.append(predicted_character)
+            message = f"Added {len(stored_signs)}"
+
+        # Press 'p' to display stored signs in the terminal as a string
+        elif key == ord('p'):
+            message = "Stored Signs: " + "".join(stored_signs)
+
+    # Display the message on the main frame
+    cv2.putText(frame, message, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
     cv2.imshow('frame', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+
+    # Break the loop if 'q' is pressed
+    if key == ord('q'):
         break
 
-cap.release()
 cv2.destroyAllWindows()
