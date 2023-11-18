@@ -21,7 +21,11 @@ of life for the hearing-impaired and fostering inclusivity in society.
 
 
 Step 1: Open this project in VS code and click on new terminal.
+
 Step 2: Type: pip install requirements.txt
+
 Step 3: Open the file 'inference_classifier.py' and run the file.
+
 Step 4: A window 'frame' appears. Click 's' key to add letters and once the letters are added press 'p' key to show the entire word.
+
 Step 5: Press 'q' key to close the window.
